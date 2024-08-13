@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex interest</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <input id="principal" type="text" placeholder="principal">
+    <input id="rate" type="text" placeholder="rate">
+    <input id="time" type="text" placeholder="time">
+    <button onclick="CalculateInterest()">Calculate Complex Interest!</button>
+    <div id="box"></div>
+</body>
+<script>
+    async function CalculateInterest() {
+        const p = document.getElementById("principal").value;
+        const r = document.getElementById("rate").value;
+        const t = document.getElementById("time").value;
+
+        const response = await fetch("https://sum-server.100xdevs.com/interest/?principal="+p+"&rate="+r+"&time="+t);
+        const ans = await response.json();
+        
+        document.getElementById("box").innerText= `Total: ${ans.total} and Interest: ${ans.interest}`
+
+        // to write long sentence with variable use ` sentence and ${variable}`
+    }
+</script>
+</html>

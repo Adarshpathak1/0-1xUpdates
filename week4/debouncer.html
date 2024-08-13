@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sum</title>
+    <style>
+        .container{
+            background-color: blueviolet;
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="div container">
+        <input oninput="DebouncerPopulateDiv()" type="number" name="num1" id="num1"><br><br>
+        <input oninput="DebouncerPopulateDiv()" type="number" name="num2" id="num2"><br><br>
+        <!-- <button onclick="populateDiv()">Calculate Sum</button> -->
+        <div id="final-sum"></div>
+    </div>
+</body>
+<script>
+    let timeout;
+    function DebouncerPopulateDiv(){
+        //how do you cancel a clock 
+        // cleartimeout
+        clearTimeout(timeout);
+         timeout = setTimeout(function(){populateDiv()},1000);
+    }
+
+    function populateDiv() {
+        
+        const n1 = (document.getElementById('num1').value);
+        const n2 = (document.getElementById('num2').value);
+        
+        fetch("http://localhost:3000/sum?n1="+ n1 + "&n2="+ n2)
+        .then(function(response) {
+            response.text()
+            .then(function(ans){
+                document.getElementById("final-sum").innerText= "The Answer is "+ans
+            })
+        })
+    }
+    async function populateDiv2(){
+        
+        const n1 = (document.getElementById('num1').value);
+        const n2 = (document.getElementById('num2').value);
+        
+        const response = await fetch("https://sum-server.100xdevs.com/sum?n1="+ n1 + "&n2="+ n2);
+        const ans = await response.text();
+        document.getElementById("final-sum").innerHTML = ans;
+    }
+
+</script>
+</html>

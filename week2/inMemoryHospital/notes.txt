@@ -1,0 +1,36 @@
+//The express is framework of nodejs , we use it because it gives simplicity code,portability.
+
+//for using express
+	npm install express
+
+//in code
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.get("/",function(req,res){
+	console.log("app is on Get /")
+});
+
+app.post("/",function(req,res){
+	console.log("app is on post /")
+});
+app.put("/",function(req,res){
+	console.log("app is on put /")
+});
+app.delete("/",function(req,res){
+	console.log("app is on delete /")
+});
+
+//to run the server
+
+app.listen(port);
+console.log("app is listenning at port "+port);
+
+ 
+
+//for get request 
+send data through query request .
+
+//for post request 
+send data through body.
