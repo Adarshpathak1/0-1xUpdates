@@ -1,13 +1,14 @@
-require("dontenv").config();
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(
-    "mongodb+srv://Admin-Adarsh_db:rm9u1mh371u3EzZX@cluster0.eg48g.mongodb.net/userAppNew",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
+console.log(process.env.MONGODB_URI);
 
 const User = mongoose.model("users", {
   name: String,
